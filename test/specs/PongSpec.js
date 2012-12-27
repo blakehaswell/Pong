@@ -12,7 +12,8 @@ describe('The init method', function () {
     afterEach(function () {
         
         // Delete HTML elements.
-        $('body').html('');
+        $('#playingCourt').remove();
+        $('.paddle').remove();
         
     });
     
