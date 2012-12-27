@@ -35,7 +35,7 @@ describe('The init method', function () {
         // Initialise the game.
         pong.init();
         
-        // Verify that that court was created.
+        // Verify that the court was created.
         var playingCourt = $('#playingCourt');
         expect(playingCourt.length).toEqual(1);
         
