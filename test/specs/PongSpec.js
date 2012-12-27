@@ -1,9 +1,15 @@
 describe('The init method', function () {
     
-    it('calls the game loop method every 50ms', function () {
+    var pong;
+    
+    beforeEach(function () {
         
         // Create a new game.
-        var pong = new Pong();
+        pong = new Pong();
+        
+    });
+    
+    it('calls the game loop method every 50ms', function () {
         
         // Setup a spy on pong.gameLoop.
         spyOn(pong, 'gameLoop');
