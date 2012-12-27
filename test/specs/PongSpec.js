@@ -30,4 +30,15 @@ describe('The init method', function () {
         
     });
     
+    it('creates a playing court', function () {
+        
+        // Initialise the game.
+        pong.init();
+        
+        // Verify that that court was created.
+        var playingCourt = $('#playingCourt');
+        expect(playingCourt.length).toEqual(1);
+        
+    });
+    
 });
