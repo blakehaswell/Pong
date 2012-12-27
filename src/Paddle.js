@@ -3,7 +3,7 @@ Paddle = function (options) {
     // Set the controls
     this.controls = options.controls;
     
-}
+};
 
 Paddle.prototype.init = function () {
     
@@ -32,4 +32,4 @@ Paddle.prototype.init = function () {
         
     }, this));
     
-}
+};
