@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     
     grunt.initConfig({
         jasmine: {
-            src: 'src/*.js',
+            src: ['lib/*.js', 'src/*.js'],
             specs: 'test/specs/*Spec.js',
             helpers: 'test/helpers/*Helper.js',
             timeout: 10000
