@@ -48,4 +48,19 @@ describe('The init method', function () {
         
     });
     
+    it('creates 2 paddles', function () {
+        
+        // Initialise the game.
+        pong.init();
+        
+        // Verify that the paddles were created.
+        var paddles = $('.paddle');
+        expect(paddles.length).toEqual(2);
+        var playerOnePaddle = paddles.filter('#paddle_playerOne');
+        expect(playerOnePaddle.length).toEqual(1);
+        var playerTwoPaddle = paddles.filter('#paddle_playerTwo');
+        expect(playerTwoPaddle.length).toEqual(1);
+        
+    });
+    
 });
