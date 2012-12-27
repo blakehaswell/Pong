@@ -9,6 +9,13 @@ describe('The init method', function () {
         
     });
     
+    afterEach(function () {
+        
+        // Delete HTML elements.
+        $('body').html('');
+        
+    });
+    
     it('calls the game loop method every 50ms', function () {
         
         // Setup a spy on pong.gameLoop.
