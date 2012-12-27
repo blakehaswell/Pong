@@ -1,6 +1,6 @@
 describe('The init method', function () {
     
-    it('creates a game loop which is called every 50ms', function () {
+    it('calls the game loop method every 50ms', function () {
         
         // Create a new game.
         var pong = new Pong();
