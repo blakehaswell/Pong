@@ -30,3 +30,37 @@ PlayingCourt.prototype.isBallInOpenPlayArea = function (ball) {
     }
     
 };
+
+PlayingCourt.prototype.isBallInPlayer1GoalArea = function (ball) {
+    
+    var goalArea = {
+        x: 0 + 16,
+        y1: 160,
+        y2: 320
+    };
+    
+    if (ball.position.x <= (goalArea.x + (ball.size / 2)) && ball.position.y >= (goalArea.y1 + (ball.size / 2))
+            && ball.position.y <= (goalArea.y2 - (ball.size / 2))) {
+        return true;
+    } else {
+        return false;
+    }
+    
+};
+
+PlayingCourt.prototype.isBallInPlayer2GoalArea = function (ball) {
+    
+    var goalArea = {
+        x: 640 - 16,
+        y1: 160,
+        y2: 320
+    };
+    
+    if (ball.position.x >= (goalArea.x - (ball.size / 2)) && ball.position.y >= (goalArea.y1 + (ball.size / 2))
+            && ball.position.y <= (goalArea.y2 - (ball.size / 2))) {
+        return true;
+    } else {
+        return false;
+    }
+    
+};

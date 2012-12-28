@@ -24,6 +24,12 @@ describe('The playing court', function () {
     
     var playingCourt;
     
+    // Create a mock ball constructor.
+    var MockBall = function (position) {
+        this.size = 16;
+        this.position = position;
+    }
+    
     beforeEach(function () {
         
         // Create the playing court.
@@ -34,11 +40,6 @@ describe('The playing court', function () {
     it('can determine if the ball is within the open play area', function () {
         
         // Create mock balls.
-        var MockBall = function (position) {
-            this.size = 16;
-            this.position = position;
-        }
-        
         var illegalBalls = [
             new MockBall({ x: 24, y: 24 }),
             new MockBall({ x: 24, y: 240 }),
@@ -65,6 +66,50 @@ describe('The playing court', function () {
         // Verify that legal balls are in open play area.
         $.each(legalBalls, function (index, ball) {
             expect(playingCourt.isBallInOpenPlayArea(ball)).toBeTruthy();
+        });
+        
+    });
+    
+    it('can determine if the ball is in the goal area', function () {
+        
+        // Create mock balls.
+        var ballsOutsideOfGoal = [
+            new MockBall({ x: 24, y: 167 }),
+            new MockBall({ x: 24, y: 313 }),
+            new MockBall({ x: 25, y: 240 }),
+            new MockBall({ x: 616, y: 167 }),
+            new MockBall({ x: 616, y: 313 }),
+            new MockBall({ x: 615, y: 240 })
+        ];
+        
+        var ballsInPlayer1Goal = [
+            new MockBall({ x: 24, y: 168 }),
+            new MockBall({ x: 24, y: 312 }),
+            new MockBall({ x: 24, y: 240 })
+        ];
+        
+        var ballsInPlayer2Goal = [
+            new MockBall({ x: 616, y: 168 }),
+            new MockBall({ x: 616, y: 312 }),
+            new MockBall({ x: 616, y: 240 })
+        ];
+        
+        // Verify that balls outside of goal are reported correctly.
+        $.each(ballsOutsideOfGoal, function (index, ball) {
+            expect(playingCourt.isBallInPlayer1GoalArea(ball)).toBeFalsy();
+            expect(playingCourt.isBallInPlayer2GoalArea(ball)).toBeFalsy();
+        });
+        
+        // Verify that balls inside of player 1 goal are reported correctly.
+        $.each(ballsInPlayer1Goal, function (index, ball) {
+            expect(playingCourt.isBallInPlayer1GoalArea(ball)).toBeTruthy();
+            expect(playingCourt.isBallInPlayer2GoalArea(ball)).toBeFalsy();
+        });
+        
+        // Verify that balls inside of player 2 goal are reported correctly.
+        $.each(ballsInPlayer2Goal, function (index, ball) {
+            expect(playingCourt.isBallInPlayer2GoalArea(ball)).toBeTruthy();
+            expect(playingCourt.isBallInPlayer1GoalArea(ball)).toBeFalsy();
         });
         
     });
