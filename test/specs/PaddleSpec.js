@@ -1,8 +1,20 @@
-describe('The paddle object.', function () {
+describe('the paddle object', function () {
     
-    describe('The controls', function () {
+    describe('the init method', function () {
         
-        it('Allow the paddle to be moved up and down', function () {
+        it('creates a paddle element that is 16px wide and has the height and position passed in', function () {
+            
+        });
+        
+    });
+    
+    it('can determine if the ball is touching the paddle', function () {
+        
+    });
+    
+    describe('the controls', function () {
+        
+        it('allow the paddle to be moved up and down', function () {
             
             // Create and initialise a new paddle.
             var paddle = new Paddle({
