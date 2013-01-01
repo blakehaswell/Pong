@@ -85,11 +85,11 @@ describe('the paddle object', function () {
 
                 // Verify.
                 $(document).trigger(upKeypress);
-                expect($paddle.position().top).toEqual(origPaddlePosition - 20);
+                expect($paddle.position().top).toEqual(origPaddlePosition - 16);
                 $(document).trigger(downKeypress);
                 expect($paddle.position().top).toEqual(origPaddlePosition);
                 $(document).trigger(downKeypress);
-                expect($paddle.position().top).toEqual(origPaddlePosition + 20);
+                expect($paddle.position().top).toEqual(origPaddlePosition + 16);
                 $(document).trigger(upKeypress);
                 expect($paddle.position().top).toEqual(origPaddlePosition);
                 

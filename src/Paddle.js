@@ -31,12 +31,12 @@ Paddle.prototype.init = function () {
         switch (event.which) {
             case this.controls.up:
                 this.$el.css({
-                    top: this.$el.position().top - 20
+                    top: this.$el.position().top - 16
                 });
             break;
             case this.controls.down:
                 this.$el.css({
-                    top: this.$el.position().top + 20
+                    top: this.$el.position().top + 16
                 });
             break;
         }
