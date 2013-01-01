@@ -30,11 +30,13 @@ Paddle.prototype.init = function () {
         
         switch (event.which) {
             case this.controls.up:
+                this.position.y -= 16;
                 this.$el.css({
                     top: this.$el.position().top - 16
                 });
             break;
             case this.controls.down:
+                this.position.y += 16;
                 this.$el.css({
                     top: this.$el.position().top + 16
                 });
@@ -42,5 +44,25 @@ Paddle.prototype.init = function () {
         }
         
     }, this));
+    
+};
+
+Paddle.prototype.isBallTouching = function (ball) {
+    
+    var paddleArea = {
+        x1: this.position.x - (16 / 2),
+        x2: this.position.x + (16 / 2),
+        y1: this.position.y - (this.height / 2),
+        y2: this.position.y + (this.height / 2)
+    };
+    
+    var ballPosition = new BallPositionReporter(ball);
+    
+    if (!ballPosition.isAbove(paddleArea.y1) && !ballPosition.isBelow(paddleArea.y2)
+            && !ballPosition.isLeftOf(paddleArea.x1) && !ballPosition.isRightOf(paddleArea.x2)) {
+        return true;
+    } else {
+        return false;
+    }
     
 };

@@ -107,6 +107,80 @@ describe('the paddle object', function () {
     
     it('can determine if the ball is touching the paddle', function () {
         
+        // Create a mock ball constructor.
+        var MockBall = function (position) {
+            this.size = 16;
+            this.position = position;
+        };
+        
+        // Create mock balls.
+        var notTouchingBalls = [
+            new MockBall({ x: 71, y: 312 }),
+            new MockBall({ x: 105, y: 312 }),
+            new MockBall({ x: 71, y: 328 }),
+            new MockBall({ x: 105, y: 328 }),
+            new MockBall({ x: 72, y: 329 }),
+            new MockBall({ x: 104, y: 329 }),
+            new MockBall({ x: 71, y: 168 }),
+            new MockBall({ x: 72, y: 167 }),
+            new MockBall({ x: 105, y: 168 }),
+            new MockBall({ x: 104, y: 167 })
+        ];
+        
+        var touchingBalls = [
+            new MockBall({ x: 72, y: 312 }),
+            new MockBall({ x: 104, y: 312 }),
+            new MockBall({ x: 72, y: 184 }),
+            new MockBall({ x: 104, y: 184 })
+        ];
+        
+        var touchingAfterMoveBalls = [
+            new MockBall({ x: 72, y: 313 }),
+            new MockBall({ x: 104, y: 313 }),
+            new MockBall({ x: 72, y: 328 }),
+            new MockBall({ x: 104, y: 328 })
+        ];
+        
+        var touchingBeforeMoveBalls = [
+            new MockBall({ x: 72, y: 168 }),
+            new MockBall({ x: 104, y: 168 }),
+            new MockBall({ x: 72, y: 183 }),
+            new MockBall({ x: 104, y: 183 })
+        ];
+        
+        // Mock the keypress event.
+        var downKeypress = $.Event('keypress');
+        downKeypress.which = 122;
+        
+        // Initialise the paddle.
+        paddle.init();
+        
+        // Verify that expected balls are not touching.
+        $.each(notTouchingBalls.concat(touchingAfterMoveBalls), function (index, ball) {
+            expect(paddle.isBallTouching(ball)).toBeFalsy();
+        });
+        
+        // Verify that expected balls are touching.
+        $.each(touchingBalls.concat(touchingBeforeMoveBalls), function (index, ball) {
+            expect(paddle.isBallTouching(ball)).toBeTruthy();
+        });
+        
+        // Move the paddle.
+        $(document).trigger(downKeypress);
+        
+        // Verify that expected balls are not touching.
+        $.each(notTouchingBalls.concat(touchingBeforeMoveBalls), function (index, ball) {
+            expect(paddle.isBallTouching(ball)).toBeFalsy();
+        });
+        
+        // Verify that expected balls are touching.
+        $.each(touchingBalls.concat(touchingAfterMoveBalls), function (index, ball) {
+            expect(paddle.isBallTouching(ball)).toBeTruthy();
+        });
+        
+        // Remove any paddle elements created.
+        $('.paddle').remove();
+        
     });
     
 });
