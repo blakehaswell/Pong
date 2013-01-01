@@ -5,7 +5,8 @@ var Pong = function () {
 Pong.prototype.init = function () {
     
     // Create playing court.
-    $('<div id="playingCourt"></div>').appendTo('body');
+    var playingCourt = new PlayingCourt();
+    playingCourt.init();
     
     // Create paddles.
     $('<div class="paddle" id="paddle_playerOne"></div>').appendTo('body');
