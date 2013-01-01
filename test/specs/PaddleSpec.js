@@ -84,20 +84,31 @@ describe('the paddle object', function () {
                 var origPaddlePosition =  $paddle.position().top;
 
                 // Mock the keypress events.
-                var upKeypress = $.Event('keypress');
-                upKeypress.which = 97;
-                var downKeypress = $.Event('keypress');
-                downKeypress.which = 122;
+                var upKeydown = $.Event('keydown');
+                upKeydown.which = 97;
+                var downKeydown = $.Event('keydown');
+                downKeydown.which = 122;
+                var upKeyup = $.Event('keyup');
+                upKeyup.which = 97;
+                var downKeyup = $.Event('keyup');
+                downKeyup.which = 122;
 
                 // Verify.
-                $(document).trigger(upKeypress);
+                $(document).trigger(upKeydown);
+                paddle.updatePosition();
                 expect($paddle.position().top).toEqual(origPaddlePosition - 16);
-                $(document).trigger(downKeypress);
+                $(document).trigger(downKeydown);
+                paddle.updatePosition();
                 expect($paddle.position().top).toEqual(origPaddlePosition);
-                $(document).trigger(downKeypress);
+                $(document).trigger(upKeyup);
+                paddle.updatePosition();
                 expect($paddle.position().top).toEqual(origPaddlePosition + 16);
-                $(document).trigger(upKeypress);
+                $(document).trigger(downKeyup);
+                
+                $(document).trigger(upKeydown);
+                paddle.updatePosition();
                 expect($paddle.position().top).toEqual(origPaddlePosition);
+                $(document).trigger(upKeyup);
                 
             });
             
@@ -149,8 +160,8 @@ describe('the paddle object', function () {
         ];
         
         // Mock the keypress event.
-        var downKeypress = $.Event('keypress');
-        downKeypress.which = 122;
+        var downKeydown = $.Event('keydown');
+        downKeydown.which = 122;
         
         // Initialise the paddle.
         paddle.init();
@@ -166,7 +177,9 @@ describe('the paddle object', function () {
         });
         
         // Move the paddle.
-        $(document).trigger(downKeypress);
+        $(document).trigger(downKeydown);
+        paddle.updatePosition();
+        $(document).trigger('keyup');
         
         // Verify that expected balls are not touching.
         $.each(notTouchingBalls.concat(touchingBeforeMoveBalls), function (index, ball) {

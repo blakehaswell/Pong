@@ -25,21 +25,40 @@ Paddle.prototype.init = function () {
         left: this.position.x - (16 / 2)
     }).appendTo('body');
     
-    // Bind to keypress events.
-    $(document).bind('keypress', $.proxy(function (event) {
-        
+    // Bind to keydown event.
+    $(document).bind('keydown', $.proxy(function (event) {
         switch (event.which) {
             case this.controls.up:
-                this.position.y -= 16;
+                this.controlBeingPressed = 'up';
             break;
             case this.controls.down:
-                this.position.y += 16;
+                this.controlBeingPressed = 'down';
             break;
         }
-        
-        this.updateElementPosition();
-        
     }, this));
+    
+    // Bind to keyup event.
+    $(document).bind('keyup', $.proxy(function (event) {
+        if ((event.which === this.controls.up && this.controlBeingPressed === 'up')
+                || (event.which === this.controls.down && this.controlBeingPressed === 'down')) {
+            this.controlBeingPressed = false;
+        }
+    }, this));
+    
+};
+
+Paddle.prototype.updatePosition = function () {
+    
+    switch (this.controlBeingPressed) {
+        case 'up':
+            this.position.y -= 16;
+        break;
+        case 'down':
+            this.position.y += 16;
+        break;
+    }
+    
+    this.updateElementPosition();
     
 };
 

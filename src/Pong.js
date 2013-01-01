@@ -9,7 +9,7 @@ Pong.prototype.init = function () {
     playingCourt.init();
     
     // Create paddles.
-    var paddles = [
+    this.paddles = [
         new Paddle({
             name: 'playerOne',
             height: 128,
@@ -18,8 +18,8 @@ Pong.prototype.init = function () {
                 y: 240
             },
             controls: {
-                up: 97,
-                down: 122
+                up: 65,
+                down: 90
             }
         }),
         
@@ -31,22 +31,27 @@ Pong.prototype.init = function () {
                 y: 240
             },
             controls: {
-                up: 107,
-                down: 109
+                up: 75,
+                down: 77
             }
         })
     ];
     
     // Initialise the paddles.
-    $.each(paddles, function (index, paddle) {
+    $.each(this.paddles, function (index, paddle) {
         paddle.init();
     });
     
     // Call gameLoop() every 50ms.
-    setInterval(this.gameLoop, 50);
+    setInterval($.proxy(this.gameLoop, this), 50);
     
 };
 
 Pong.prototype.gameLoop = function () {
+    
+    // Update the position of the paddles.
+    $.each(this.paddles, function (index, paddle) {
+        paddle.updatePosition();
+    });
     
 };

@@ -65,3 +65,33 @@ describe('The init method', function () {
     });
     
 });
+
+describe('the game loop', function () {
+    
+    it('calls the updatePosition method on each of the paddles', function () {
+        
+        // Create a mock paddle constructor.
+        var MockPaddle = function () {
+            this.updatePosition = jasmine.createSpy();
+        };
+        
+        var pong = new Pong();
+        
+        // Mock the paddles.
+        pong.paddles = [
+            new MockPaddle(),
+            new MockPaddle(),
+            new MockPaddle()
+        ];
+        
+        // Call the gameLoop method.
+        pong.gameLoop();
+        
+        // Verify that the method has been called for each paddle.
+        $.each(pong.paddles, function (index, paddle) {
+            expect(paddle.updatePosition.calls.length).toEqual(1);
+        });
+        
+    });
+    
+});
