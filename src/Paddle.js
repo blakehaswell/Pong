@@ -31,20 +31,22 @@ Paddle.prototype.init = function () {
         switch (event.which) {
             case this.controls.up:
                 this.position.y -= 16;
-                this.$el.css({
-                    top: this.$el.position().top - 16
-                });
             break;
             case this.controls.down:
                 this.position.y += 16;
-                this.$el.css({
-                    top: this.$el.position().top + 16
-                });
             break;
         }
         
+        this.updateElementPosition();
+        
     }, this));
     
+};
+
+Paddle.prototype.updateElementPosition = function () {
+    this.$el.css({
+        top: this.position.y - (this.height / 2)
+    });
 };
 
 Paddle.prototype.isBallTouching = function (ball) {
