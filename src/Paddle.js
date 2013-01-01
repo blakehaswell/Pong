@@ -1,17 +1,28 @@
 Paddle = function (options) {
     
-    // Set the controls
+    // Set the name.
+    this.name = options.name;
+    
+    // Set the controls.
     this.controls = options.controls;
+    
+    // Set the height.
+    this.height = options.height;
+    
+    // Set the position.
+    this.position = options.position;
     
 };
 
 Paddle.prototype.init = function () {
     
     // Create the paddle element.
-    this.$el = $('<div></div>').css({
+    this.$el = $('<div class="paddle" id="paddle_' + this.name + '"></div>').css({
+        width: 16,
+        height: this.height,
         position: 'absolute',
-        top: 0,
-        left: 0
+        top: this.position.y - (this.height / 2),
+        left: this.position.x - (16 / 2)
     }).appendTo('body');
     
     // Bind to keypress events.
