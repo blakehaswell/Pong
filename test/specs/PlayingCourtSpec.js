@@ -28,7 +28,7 @@ describe('The playing court', function () {
     var MockBall = function (position) {
         this.size = 16;
         this.position = position;
-    }
+    };
     
     beforeEach(function () {
         
