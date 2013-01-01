@@ -1,24 +1,30 @@
 describe('the paddle object', function () {
     
-    describe('the init method', function () {
+    var paddle;
+    
+    beforeEach(function () {
         
-        var paddle;
+        // Create the paddle.
+        paddle = new Paddle({
+            name: 'playerOne',
+            height: 128,
+            position: {
+                x: 88,
+                y: 240
+            },
+            controls: {
+                up: 97,
+                down: 122
+            }
+        });
+        
+    });
+    
+    describe('the init method', function () {
         
         beforeEach(function () {
             
-            // Create and initialise the paddle.
-            var paddle = new Paddle({
-                name: 'playerOne',
-                height: 128,
-                position: {
-                    x: 88,
-                    y: 240
-                },
-                controls: {
-                    up: 97,
-                    down: 122
-                }
-            });
+            // Initialise the paddle.
             paddle.init();
             
         });
